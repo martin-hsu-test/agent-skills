@@ -57,7 +57,12 @@ echo
 # 3. Personas --------------------------------------------------------------
 echo "▶ [3/3] Copying personas → $AGENTS_DST"
 mkdir -p "$AGENTS_DST"
-cp -v "$AGENTS_SRC"/*.md "$AGENTS_DST"/ | sed 's/^/   /'
+for f in "$AGENTS_SRC"/*.md; do
+  name="$(basename "$f")"
+  # README.md is repo documentation, not an agent definition
+  [[ "$name" == "README.md" ]] && continue
+  cp -v "$f" "$AGENTS_DST"/ | sed 's/^/   /'
+done
 echo
 
 echo "✅ Done."

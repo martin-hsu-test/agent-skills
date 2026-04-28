@@ -60,6 +60,7 @@ echo
 echo "▶ [3/3] Removing personas from $AGENTS_DST"
 for f in "$AGENTS_SRC"/*.md; do
   name="$(basename "$f")"
+  [[ "$name" == "README.md" ]] && continue
   target="$AGENTS_DST/$name"
   if [[ -f "$target" ]]; then
     rm -v "$target" | sed 's/^/   /'
